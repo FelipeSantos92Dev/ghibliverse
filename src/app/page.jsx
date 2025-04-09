@@ -1,6 +1,6 @@
 // pages/index.js
 import Head from "next/head";
-import FilmList from "../components/FilmList";
+import FilmList from "../components/filmList";
 import styles from "./page.module.css";
 
 export default function Home() {

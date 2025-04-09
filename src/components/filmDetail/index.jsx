@@ -2,7 +2,7 @@
 
 // components/FilmDetail.js
 import { useState, useEffect } from "react";
-import api from "../services/api";
+import api from "@/services/api";
 import styles from "./filmDetail.module.css";
 
 export default function FilmDetail({ filmId, onClose }) {

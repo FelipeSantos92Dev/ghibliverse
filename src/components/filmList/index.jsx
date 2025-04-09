@@ -1,8 +1,8 @@
 "use client";
 // components/FilmList.js - versão atualizada
 import { useState, useEffect } from "react";
-import api from "../services/api";
-import FilmDetail from "./FilmDetail";
+import api from "@/services/api";
+import FilmDetail from "../filmDetail";
 import styles from "./filmList.module.css";
 
 export default function FilmList() {
