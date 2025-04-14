@@ -1,22 +1,19 @@
 "use client";
-// components/FilmList.js - versão atualizada
 import { useState, useEffect } from "react";
-import api from "@/services/api";
-import FilmDetail from "../filmDetail";
+
 import styles from "./filmList.module.css";
+import api from "@/services/api";
 
 export default function FilmList() {
   const [films, setFilms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedFilmId, setSelectedFilmId] = useState(null);
 
   useEffect(() => {
     const fetchFilms = async () => {
       try {
         setLoading(true);
         const response = await api.get("/films");
-
         setFilms(response.data);
         setLoading(false);
       } catch (error) {
@@ -37,46 +34,24 @@ export default function FilmList() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Filmes do Studio Ghibli</h2>
-      <div className={styles.grid}>
+      <h1 className={styles.title}>Filmes do Studio Ghibli</h1>
+      <div className={styles.filmGrid}>
         {films.map((film) => (
-          <div
-            key={film.id}
-            className={styles.card}
-            onClick={() => setSelectedFilmId(film.id)}
-          >
+          <div key={film.id} className={styles.filmCard}>
             <div className={styles.imageContainer}>
-              <img
-                src={film.image || "/placeholder.jpg"}
-                alt={film.title}
-                className={styles.image}
-              />
+              <img src={film.image} alt={film.title} className={styles.image} />
             </div>
             <div className={styles.content}>
-              <h3 className={styles.filmTitle}>{film.title}</h3>
-              <p className={styles.director}>
-                Diretor: <span>{film.director}</span>
-              </p>
-              <p className={styles.year}>
-                Ano: <span>{film.release_date}</span>
-              </p>
-              <p className={styles.score}>
-                Pontuação: <span>{film.rt_score}%</span>
-              </p>
-              <p className={styles.description}>
-                {film.description.substring(0, 150)}...
-              </p>
+              <h2 className={styles.filmTitle}>{film.title}</h2>
+              <p className={styles.director}>Diretor: {film.director}</p>
+              <p className={styles.year}>{film.release_date}</p>
+              <div className={styles.rating}>
+                <span className={styles.score}>{film.rt_score}%</span>
+              </div>
             </div>
           </div>
         ))}
       </div>
-
-      {selectedFilmId && (
-        <FilmDetail
-          filmId={selectedFilmId}
-          onClose={() => setSelectedFilmId(null)}
-        />
-      )}
     </div>
   );
 }
