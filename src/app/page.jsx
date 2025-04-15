@@ -1,4 +1,3 @@
-// pages/index.js
 import FilmList from "../components/filmList";
 import styles from "./page.module.css";
 
